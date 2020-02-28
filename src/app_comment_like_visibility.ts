@@ -1,9 +1,9 @@
 import { LikeVisibility } from './like_visibility';
 
 export class AppCommentLikeVisibility implements LikeVisibility {
-    public visibleLikeToClicked(): void {
-        const likeBtnEls = document.getElementsByClassName('commentlist-footer-like-count-gaia') as HTMLCollectionOf<HTMLElement>;
-        const likeEls = document.getElementsByClassName('commentlist-footer-like-gaia') as HTMLCollectionOf<HTMLElement>;
+    public visibleLikeToClicked(root: Document): void {
+        const likeBtnEls = root.getElementsByClassName('commentlist-footer-like-count-gaia') as HTMLCollectionOf<HTMLElement>;
+        const likeEls = root.getElementsByClassName('commentlist-footer-like-gaia') as HTMLCollectionOf<HTMLElement>;
 
         for (let i = 0; i < likeEls.length; i++) {
             const likeEl = likeEls.item(i) as HTMLElement;
@@ -14,9 +14,9 @@ export class AppCommentLikeVisibility implements LikeVisibility {
         }
     }
     
-    public hideLikeConts(): void {
-        const likeCountEls = document.getElementsByClassName('commentlist-footer-like-count-text-gaia') as HTMLCollectionOf<HTMLElement>;
-        const likeBtnEls = document.getElementsByClassName('commentlist-footer-like-count-gaia') as HTMLCollectionOf<HTMLElement>;
+    public hideLikeConts(root: Document): void {
+        const likeCountEls = root.getElementsByClassName('commentlist-footer-like-count-text-gaia') as HTMLCollectionOf<HTMLElement>;
+        const likeBtnEls = root.getElementsByClassName('commentlist-footer-like-count-gaia') as HTMLCollectionOf<HTMLElement>;
 
         for (const el of likeCountEls) {
             el.style.display = 'none';

@@ -1,4 +1,4 @@
 export interface LikeVisibility {
-    visibleLikeToClicked(): void ;
-    hideLikeConts(): void ;
+    visibleLikeToClicked(root: Document): void ;
+    hideLikeConts(root: Document): void ;
 }

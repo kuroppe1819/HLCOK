@@ -1,9 +1,15 @@
 import { LikeVisibility } from './like_visibility';
 
 export class ThreadLikeVisibility implements LikeVisibility{
-    public visibleLikeToClicked(root: Document): void {
-        const likeBtnEls = root.getElementsByClassName('ocean-ui-comments-commentbase-like-count') as HTMLCollectionOf<HTMLElement>;
-        const likeEls = root.getElementsByClassName('ocean-ui-comments-commentbase-like') as HTMLCollectionOf<HTMLElement>;
+    private root: Document;
+
+    constructor(root: Document) {
+        this.root = root;
+    }
+
+    public visibleLikeToClicked(): void {
+        const likeBtnEls = this.root.getElementsByClassName('ocean-ui-comments-commentbase-like-count') as HTMLCollectionOf<HTMLElement>;
+        const likeEls = this.root.getElementsByClassName('ocean-ui-comments-commentbase-like') as HTMLCollectionOf<HTMLElement>;
 
         for (let i = 0; i < likeEls.length; i++) {
             const likeEl = likeEls.item(i) as HTMLElement;
@@ -14,9 +20,9 @@ export class ThreadLikeVisibility implements LikeVisibility{
         }
     }
 
-    public hideLikeConts(root: Document): void {
-        const likeCountEls = root.getElementsByClassName('ocean-ui-comments-commentbase-like-count-text') as HTMLCollectionOf<HTMLElement>;
-        const likeBtnEls = root.getElementsByClassName('ocean-ui-comments-commentbase-like-count') as HTMLCollectionOf<HTMLElement>;
+    public hideLikeConts(): void {
+        const likeCountEls = this.root.getElementsByClassName('ocean-ui-comments-commentbase-like-count-text') as HTMLCollectionOf<HTMLElement>;
+        const likeBtnEls = this.root.getElementsByClassName('ocean-ui-comments-commentbase-like-count') as HTMLCollectionOf<HTMLElement>;
 
         for (const el of likeCountEls) {
             el.style.display = 'none';

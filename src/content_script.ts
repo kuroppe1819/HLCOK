@@ -12,9 +12,12 @@ const registVisibilityObserver = (target: HTMLElement, visibility: LikeVisibilit
 const detectToEmbedIframe = (target: HTMLElement) => {
     const registIframeVisibilityObserver = () => {
         const iframe = document.getElementById('notification-iframe-gaia') as HTMLIFrameElement;
-        const iframeDocument = iframe.contentDocument;
+        if (!iframe) {
+            return;
+        }
 
-        if (!iframeDocument.body) {
+        const iframeDocument = iframe.contentDocument;
+        if (!iframeDocument || !iframeDocument.body) {
             return;
         }
         const visibility = new AppCommentLikeVisibility(iframeDocument);

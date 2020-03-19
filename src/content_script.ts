@@ -9,42 +9,15 @@ const registVisibilityObserver = (target: HTMLElement, visibility: LikeVisibilit
     visibleLiketoClickedObserver.observe(target, {childList: true, subtree: true});
 }
 
-const detectToEmbedIframe = (target: HTMLElement) => {
-    const registIframeVisibilityObserver = () => {
-        const iframe = document.getElementById('notification-iframe-gaia') as HTMLIFrameElement;
-        if (!iframe || !('contentDocument' in iframe)) {
-            return;
-        }
-
-        const iframeDocument = iframe.contentDocument;
-        if (!iframeDocument || !iframeDocument.body) {
-            return;
-        }
-        const visibility = new AppCommentLikeVisibility(iframeDocument);
-        visibility.hideLikeConts();
-        visibility.visibleLikeToClicked();
-        registVisibilityObserver(iframeDocument.body, visibility);
-    };
-    const observer = new MutationObserver(registIframeVisibilityObserver);
-    observer.observe(target, {attributes: true, childList: true, subtree: true, attributeFilter: ['style']});
-}
-
 const addObserverIfDesiredNodeAvailable = () => {
     const contentBody = document.getElementById('contents-body-ocean');
     if (contentBody) {
-        const visibility = new ThreadLikeVisibility(document);
-        visibility.hideLikeConts();
-        visibility.visibleLikeToClicked();
-        registVisibilityObserver(contentBody, visibility);
-        detectToEmbedIframe(contentBody);
+        registVisibilityObserver(contentBody, new ThreadLikeVisibility(document));
     }
 
     const sideBarContent = document.querySelector('.gaia-argoui-app-show-sidebar-content') as HTMLElement;
     if (sideBarContent) {
-        const visibility = new AppCommentLikeVisibility(document);
-        visibility.hideLikeConts();
-        visibility.visibleLikeToClicked();
-        registVisibilityObserver(sideBarContent, visibility);
+        registVisibilityObserver(sideBarContent, new AppCommentLikeVisibility(document));
     }
 };
 

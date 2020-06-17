@@ -1,4 +1,4 @@
-import { LikeVisibility } from './like_visibility';
+import { LikeVisibility } from './LikeVisibility';
 
 export class AppCommentLikeVisibility implements LikeVisibility {
     private root: Document;
@@ -7,9 +7,13 @@ export class AppCommentLikeVisibility implements LikeVisibility {
         this.root = root;
     }
 
-    public visibleLikeToClicked(): void {
-        const likeBtnEls = this.root.getElementsByClassName('commentlist-footer-like-count-gaia') as HTMLCollectionOf<HTMLElement>;
-        const likeEls = this.root.getElementsByClassName('commentlist-footer-like-gaia') as HTMLCollectionOf<HTMLElement>;
+    public likeClicked(): void {
+        const likeBtnEls = this.root.getElementsByClassName('commentlist-footer-like-count-gaia') as HTMLCollectionOf<
+            HTMLElement
+        >;
+        const likeEls = this.root.getElementsByClassName('commentlist-footer-like-gaia') as HTMLCollectionOf<
+            HTMLElement
+        >;
 
         for (let i = 0; i < likeEls.length; i++) {
             const likeEl = likeEls.item(i) as HTMLElement;
@@ -19,10 +23,14 @@ export class AppCommentLikeVisibility implements LikeVisibility {
             }
         }
     }
-    
-    public hideLikeConts(): void {
-        const likeCountEls = this.root.getElementsByClassName('commentlist-footer-like-count-text-gaia') as HTMLCollectionOf<HTMLElement>;
-        const likeBtnEls = this.root.getElementsByClassName('commentlist-footer-like-count-gaia') as HTMLCollectionOf<HTMLElement>;
+
+    public hideLikeCounts(): void {
+        const likeCountEls = this.root.getElementsByClassName(
+            'commentlist-footer-like-count-text-gaia'
+        ) as HTMLCollectionOf<HTMLElement>;
+        const likeBtnEls = this.root.getElementsByClassName('commentlist-footer-like-count-gaia') as HTMLCollectionOf<
+            HTMLElement
+        >;
 
         for (const el of likeCountEls) {
             el.style.display = 'none';
@@ -32,4 +40,4 @@ export class AppCommentLikeVisibility implements LikeVisibility {
             el.classList.remove('commentlist-footer-like-count-active-gaia');
         }
     }
-} 
+}
